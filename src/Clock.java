@@ -1,3 +1,6 @@
+/**
+ * This class represents a clock with hour and minute
+ */
 class Clock {
     private int hour;
     private int minute;
@@ -79,7 +82,6 @@ class Clock {
     }
 
     /**
-     *
      * @return string with hour and minute
      */
     @Override
