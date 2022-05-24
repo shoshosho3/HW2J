@@ -1,13 +1,19 @@
 public class Addition extends Expression{
 
-    private int number1, number2;
+    private Expression left, right;
+
+    public Addition(Expression left, Expression right) {
+        this.left = left;
+        this.right = right;
+    }
+
     @Override
     public double evaluate() {
-        return number1 + number2;
+        return left.evaluate() + right.evaluate();
     }
 
     @Override
     public String toString() {
-        return "(" + number1 + ")" + "+ (" + number2 + ")";
+        return "(" + left.toString() + " + " + right.toString() + ")";
     }
 }
