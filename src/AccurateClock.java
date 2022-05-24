@@ -40,6 +40,6 @@ class AccurateClock extends Clock {
      */
     @Override
     public String toString() {
-        return super.toString() + ":" + seconds;
+        return super.toString() + String.format(":%2d",seconds).replace(' ', '0');
     }
 }

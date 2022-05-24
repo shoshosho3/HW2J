@@ -86,6 +86,6 @@ class Clock {
      */
     @Override
     public String toString() {
-        return hour + ":" + minute;
+        return String.format("%2d:%2d",hour , minute).replace(' ', '0');
     }
 }
