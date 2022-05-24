@@ -1,31 +1,19 @@
 /**
- * This function
+ * This class represents a multiplication of a number of expressions
  */
-public class MultiMultiplication extends Expression {
-
-    Expression[] expressions;
+public class MultiMultiplication extends MultiExpression {
 
     public MultiMultiplication(Expression... expressions) {
-        this.expressions = expressions;
+        super(expressions);
     }
 
     @Override
-    public double evaluate() {
-        int result = 1;
-        for (Expression exp : expressions) {
-            result *= exp.evaluate();
-        }
-        return result;
+    public double add(double sum, double value) {
+        return sum * value;
     }
 
     @Override
-    public String toString() {
-        String result = "(";
-
-        for (Expression exp : expressions) {
-            result += exp.toString() + " * ";
-        }
-        result = result.substring(0, result.length() - 3);
-        return result + ")";
+    public String getSymbol() {
+        return " * ";
     }
 }
