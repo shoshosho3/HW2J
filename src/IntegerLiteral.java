@@ -24,4 +24,8 @@ public class IntegerLiteral extends Expression {
         return number;
     }
 
+    @Override
+    public String toString() {
+        return "(" + number + ")";
+    }
 }
