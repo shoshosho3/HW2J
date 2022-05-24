@@ -17,12 +17,12 @@ public class MultiMultiplication extends Expression {
 
     @Override
     public String toString() {
-        String result = "";
+        String result = "(";
 
         for (Expression exp : expressions) {
             result += exp.toString() + " * ";
         }
         result = result.substring(0, result.length() - 3);
-        return result;
+        return result + ")";
     }
 }
