@@ -8,6 +8,6 @@ public class Addition extends Expression{
 
     @Override
     public String toString() {
-        return "(" + number1 + ")";
+        return "(" + number1 + ")" + "+ (" + number2 + ")";
     }
 }
