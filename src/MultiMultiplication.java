@@ -20,8 +20,8 @@ public class MultiMultiplication extends MultiExpression {
      * @return result of multiplication
      */
     @Override
-    public double add(double sum, double value) {
-        return sum * value;
+    public double add(double leftNumber, double rightNumber) {
+        return leftNumber * rightNumber;
     }
 
     /**
