@@ -3,7 +3,7 @@
  */
 public abstract class MultiExpression extends Expression {
 
-    protected final Expression[] expressions;
+    private final Expression[] expressions;
 
     /**
      * constructor

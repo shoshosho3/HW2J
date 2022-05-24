@@ -3,7 +3,7 @@
  */
 public class UnaryMinus extends Expression {
 
-    Expression expression;
+    private final Expression expression;
 
     /**
      * constructor
