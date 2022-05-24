@@ -1,3 +1,6 @@
+/**
+ * This function
+ */
 public class MultiMultiplication extends Expression {
 
     Expression[] expressions;

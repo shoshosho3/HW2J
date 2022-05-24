@@ -1,19 +1,16 @@
-public class Addition extends Expression{
+/**
+ * This class represents
+ */
+public class Addition extends MultiAddition {
 
-    private Expression left, right;
-
-    public Addition(Expression left, Expression right) {
-        this.left = left;
-        this.right = right;
+    /**
+     * constructor
+     *
+     * @param leftExpression  left expression in the addition
+     * @param rightExpression right expression in the addition
+     */
+    public Addition(Expression leftExpression, Expression rightExpression) {
+        super(leftExpression, rightExpression);
     }
 
-    @Override
-    public double evaluate() {
-        return left.evaluate() + right.evaluate();
-    }
-
-    @Override
-    public String toString() {
-        return "(" + left.toString() + " + " + right.toString() + ")";
-    }
 }
