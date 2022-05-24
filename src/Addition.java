@@ -1,11 +1,13 @@
 public class Addition extends Expression{
+
+    private int number1, number2;
     @Override
     public double evaluate() {
-        return 0;
+        return number1 + number2;
     }
 
     @Override
     public String toString() {
-        return null;
+        return "(" + number1 + ")";
     }
 }

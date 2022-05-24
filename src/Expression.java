@@ -1,5 +1,11 @@
-abstract class Expression {
-    abstract public double evaluate();
+/**
+ * This class represents an arithmetic expression
+ */
+public abstract class Expression {
+    abstract public double evaluate() ;
+
     @Override
-    abstract public String toString();
+    public String toString() {
+        return "";
+    }
 }
