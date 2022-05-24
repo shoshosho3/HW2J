@@ -1,20 +1,16 @@
-public class Subtraction extends Expression {
+public class Subtraction extends MultiExpression {
 
-    private Expression left;
-    private Expression right;
-
-    public Subtraction(Expression left, Expression right) {
-        this.left = left;
-        this.right = right;
+    public Subtraction(Expression leftExpression, Expression rightExpression) {
+        super(leftExpression, rightExpression);
     }
 
     @Override
-    public double evaluate() {
-        return left.evaluate() - right.evaluate();
+    public double add(double leftNumber, double rightNumber) {
+        return leftNumber - rightNumber;
     }
 
     @Override
-    public String toString() {
-        return "("+left.toString() + " - " + right.toString()+")";
+    public String getSymbol() {
+        return " - ";
     }
 }

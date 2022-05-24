@@ -1,38 +1,25 @@
 /**
  * This class represents division of 2 expressions
  */
-public class Division extends Expression {
-
-    private final Expression dividend, divisor;
+public class Division extends MultiExpression {
 
     /**
      * constructor
      *
-     * @param dividend expression being divided
-     * @param divisor  expression being divided by
+     * @param leftExpression  left expression
+     * @param rightExpression right expression
      */
-    public Division(Expression dividend, Expression divisor) {
-        this.dividend = dividend;
-        this.divisor = divisor;
+    public Division(Expression leftExpression, Expression rightExpression) {
+        super(leftExpression, rightExpression);
     }
 
-    /**
-     * This function evaluates the quotient of the division
-     *
-     * @return the quotient of the division
-     */
     @Override
-    public double evaluate() {
-        return dividend.evaluate() / divisor.evaluate();
+    public double add(double leftNumber, double rightNumber) {
+        return leftNumber / rightNumber;
     }
 
-    /**
-     * This function gives a string representing expression
-     *
-     * @return a string representing expression
-     */
     @Override
-    public String toString() {
-        return "(" + dividend.toString() + " / " + divisor.toString() + ")";
+    public String getSymbol() {
+        return " / ";
     }
 }

@@ -18,7 +18,7 @@ public abstract class MultiExpression extends Expression {
     /**
      * This function evaluates the sum of all expressions
      *
-     * @return the sum of all expressions
+     * @return the result of all expressions
      */
     @Override
     public double evaluate() {
@@ -29,7 +29,14 @@ public abstract class MultiExpression extends Expression {
         return sum;
     }
 
-    public abstract double add(double sum, double value);
+    /**
+     * This function activates arithmetic operation on 2 doubles
+     *
+     * @param leftNumber double
+     * @param rightNumber double
+     * @return result of arithmetic operation
+     */
+    public abstract double add(double leftNumber, double rightNumber);
 
     /**
      * This function gives a string representing expression
@@ -46,5 +53,9 @@ public abstract class MultiExpression extends Expression {
         return s + ")";
     }
 
+    /**
+     *
+     * @return symbol of arithmetic operation being done
+     */
     public abstract String getSymbol();
 }
