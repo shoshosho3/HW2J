@@ -1,20 +1,15 @@
-public class Multiplication extends Expression {
+/**
+ * This class represents multiplication of 2 expressions
+ */
+public class Multiplication extends MultiMultiplication {
 
-    private Expression left;
-    private Expression right;
-
-    public Multiplication(Expression left, Expression right) {
-        this.left = left;
-        this.right = right;
-    }
-
-    @Override
-    public double evaluate() {
-        return left.evaluate() * right.evaluate();
-    }
-
-    @Override
-    public String toString() {
-        return left.toString() + " * " + right.toString();
+    /**
+     * constructor
+     *
+     * @param leftExpression  left expression in multiplication
+     * @param rightExpression right expression in multiplication
+     */
+    public Multiplication(Expression leftExpression, Expression rightExpression) {
+        super(leftExpression, rightExpression);
     }
 }

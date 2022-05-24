@@ -24,13 +24,4 @@ public class DoubleLiteral extends Expression {
         return number;
     }
 
-    /**
-     * This function gives a string representing expression
-     *
-     * @return a string representing expression
-     */
-    @Override
-    public String toString() {
-        return "(" + number + ")";
-    }
 }

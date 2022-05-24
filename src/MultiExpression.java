@@ -16,14 +16,14 @@ public abstract class MultiExpression extends Expression {
 
 
     /**
-     * This function evaluates the sum of all expressions
+     * This function evaluates the result of arithmetic operation on all expressions
      *
      * @return the result of all expressions
      */
     @Override
     public double evaluate() {
         double sum = 0;
-        for( Expression expression : expressions) {
+        for (Expression expression : expressions) {
             sum = add(sum, expression.evaluate());
         }
         return sum;
@@ -32,7 +32,7 @@ public abstract class MultiExpression extends Expression {
     /**
      * This function activates arithmetic operation on 2 doubles
      *
-     * @param leftNumber double
+     * @param leftNumber  double
      * @param rightNumber double
      * @return result of arithmetic operation
      */
@@ -46,7 +46,7 @@ public abstract class MultiExpression extends Expression {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("(");
-        for( Expression expression : expressions) {
+        for (Expression expression : expressions) {
             s.append(expression.toString()).append(getSymbol());
         }
         s = new StringBuilder(s.substring(0, s.length() - 3));
@@ -54,7 +54,6 @@ public abstract class MultiExpression extends Expression {
     }
 
     /**
-     *
      * @return symbol of arithmetic operation being done
      */
     public abstract String getSymbol();
