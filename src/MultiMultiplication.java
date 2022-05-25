@@ -24,6 +24,8 @@ public class MultiMultiplication extends MultiExpression {
         return leftNumber * rightNumber;
     }
 
+
+
     /**
      * @return String with symbol of multiplication
      */

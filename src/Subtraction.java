@@ -25,6 +25,7 @@ public class Subtraction extends MultiExpression {
         return leftNumber - rightNumber;
     }
 
+
     /**
      * @return String with symbol of subtraction
      */

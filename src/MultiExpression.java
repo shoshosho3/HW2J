@@ -22,9 +22,9 @@ public abstract class MultiExpression extends Expression {
      */
     @Override
     public double evaluate() {
-        double sum = 0;
-        for (Expression expression : expressions) {
-            sum = add(sum, expression.evaluate());
+        double sum = expressions[0].evaluate();
+        for (int i = 1; i < expressions.length; i++) {
+            sum = add(sum, expressions[i].evaluate());
         }
         return sum;
     }

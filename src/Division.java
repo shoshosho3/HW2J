@@ -25,6 +25,8 @@ public class Division extends MultiExpression {
         return leftNumber / rightNumber;
     }
 
+
+
     /**
      * @return String with symbol of division
      */

@@ -17,7 +17,7 @@ public class PolishNotationParser extends ExpressionParser {
     void buildExpression(String expression, int index, Expression[] expressions, boolean[] expressionEnds) {
         if (expression.charAt(index + 1) == 'u') {
             expressions[index] =
-                    new UnaryMinus(getExpression(expression, index + 3, expressions, expressionEnds, false));
+                    new UnaryMinus(getExpression(expression, index + 3, expressions, expressionEnds, true));
         } else {
             int afterSpace = index + 2;
             int middle = getMiddle(expression.substring(afterSpace), afterSpace, expressions, expressionEnds);
