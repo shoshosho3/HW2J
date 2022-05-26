@@ -1,16 +1,14 @@
 public class PolishNotationParser extends ExpressionParser {
 
     @Override
-    int direction() {return 1;}
+    Expression parse(String expression) {
+        expression = "1 " + expression;
+        return parseByParts(expression.split(" "));
+    }
 
     @Override
-    int beginIndex(String expression) {return expression.length() - 1;}
-
-    @Override
-    int endIndex(String expression) {return 0;}
-
-    @Override
-    int getEndIndex(String expression) {
-        return expression.indexOf(" ");
+    void assignValues(Expression[] expressions, String[] parts) {
+        expressions[0] = parseByParts(parts);
+        expressions[1] = parseByParts(parts);
     }
 }

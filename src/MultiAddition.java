@@ -6,10 +6,11 @@ public class MultiAddition extends MultiExpression {
     /**
      * constructor
      *
+     * @param expression1 an expression
      * @param expressions unknown number of expressions being summed
      */
-    public MultiAddition(Expression... expressions) {
-        super(expressions);
+    public MultiAddition(Expression expression1, Expression... expressions) {
+        super(expression1, expressions);
     }
 
     /**

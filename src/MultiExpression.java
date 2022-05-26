@@ -3,14 +3,17 @@
  */
 public abstract class MultiExpression extends Expression {
 
+    private final Expression expression1;
     private final Expression[] expressions;
 
     /**
      * constructor
      *
+     * @param expression1 an expression
      * @param expressions unknown number of expressions
      */
-    public MultiExpression(Expression... expressions) {
+    public MultiExpression(Expression expression1, Expression... expressions) {
+        this.expression1 = expression1;
         this.expressions = expressions;
     }
 
@@ -22,9 +25,9 @@ public abstract class MultiExpression extends Expression {
      */
     @Override
     public double evaluate() {
-        double sum = expressions[0].evaluate();
-        for (int i = 1; i < expressions.length; i++) {
-            sum = add(sum, expressions[i].evaluate());
+        double sum = expression1.evaluate();
+        for(Expression expression : expressions) {
+            sum = add(sum, expression.evaluate());
         }
         return sum;
     }
@@ -45,7 +48,7 @@ public abstract class MultiExpression extends Expression {
      */
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder("(");
+        StringBuilder s = new StringBuilder("(" + expression1 + getSymbol());
         for (Expression expression : expressions) {
             s.append(expression.toString()).append(getSymbol());
         }

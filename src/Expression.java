@@ -16,7 +16,5 @@ public abstract class Expression {
      * @return a string representing expression
      */
     @Override
-    public String toString() {
-        return "(" + evaluate() + ")";
-    }
+    public abstract String toString();
 }

@@ -6,10 +6,11 @@ public class MultiMultiplication extends MultiExpression {
     /**
      * constructor
      *
+     * @param expression1 an expression
      * @param expressions unknown number of expressions being multiplied
      */
-    public MultiMultiplication(Expression... expressions) {
-        super(expressions);
+    public MultiMultiplication(Expression expression1, Expression... expressions) {
+        super(expression1, expressions);
     }
 
     /**

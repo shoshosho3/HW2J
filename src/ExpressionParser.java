@@ -1,100 +1,88 @@
 abstract class ExpressionParser {
 
-    private Expression parseByParts(String[] parts) {
+    /**
+     * This function gets a string representing an expression and returns the fitting Expression
+     *
+     * @param expression string representing an expression
+     * @return fitting Expression to string
+     */
+    abstract Expression parse(String expression);
+
+    /**
+     * This function gets an array of strings representing an expression and parses it to an expression
+     *
+     * @param parts array of strings which are parts of an expression
+     * @return an Expression of the string parts
+     */
+    protected Expression parseByParts(String[] parts) {
 
         int index = Integer.parseInt(parts[0]);
         String curr = parts[index];
         parts[0] = "" + (index + 1);
 
+        //checking if current part is unary minus
         if (curr.equals("-u")) {
             Expression exp = parseByParts(parts);
             return new UnaryMinus(exp);
         }
+        //checking if current part is a symbol
         if (isSymbol(curr.charAt(0))) {
             return dualExpression(parts, curr);
         }
         return literalExpression(curr);
     }
 
-
-    Expression parse(String expression) {
-
-        if (direction() == -1) {
-            expression = reverse(expression);
-            expression = "1 " + expression;
-            String[] parts = expression.split(" ");
-            for (int i = 0; i < parts.length; i++) {
-                if (parts[i] != "-u") {
-                    parts[i] = reverse(parts[i]);
-                }
-            }
-            return parseByParts(parts);
-        }
-        expression = "1 " + expression;
-        return parseByParts(expression.split(" "));
-    }
-
-
-    private String reverse(String s) {
-        String result = "";
-        for (int i = 0; i < s.length(); i++) {
-            result = s.charAt(i) + result;
-        }
-        return result;
-    }
-
-
-    abstract int beginIndex(String expression);
-
-    abstract int endIndex(String expression);
-
-    abstract int direction();
-
-
-    abstract int getEndIndex(String expression);
-
+    /**
+     * This function gets a symbol and String parts of expressions
+     * and returns the arithmetic function of symbol on expressions
+     *
+     * @param parts  String array of parts of an expression
+     * @param symbol String representing an arithmetic symbol
+     * @return the arithmetic function of symbol on expressions
+     */
     private Expression dualExpression(String[] parts, String symbol) {
 
-        Expression left, right;
+        Expression[] expressions = new Expression[2];
+        assignValues(expressions, parts);
         switch (symbol) {
             case "-":
-                left = parseByParts(parts);
-                right = parseByParts(parts);
-                if (direction() == -1) return new Subtraction(right, left);
-                return new Subtraction(left, right);
-
+                return new Subtraction(expressions[0], expressions[1]);
             case "+":
-                left = parseByParts(parts);
-                right = parseByParts(parts);
-                if (direction() == -1) return new Addition(right, left);
-                return new Addition(left, right);
-
+                return new Addition(expressions[0], expressions[1]);
             case "*":
-                left = parseByParts(parts);
-                right = parseByParts(parts);
-
-                if (direction() == -1) return new Multiplication(right, left);
-                return new Multiplication(left, right);
-
+                return new Multiplication(expressions[0], expressions[1]);
             default:
-                left = parseByParts(parts);
-                right = parseByParts(parts);
-
-                if (direction() == -1) return new Division(right, left);
-                return new Division(left, right);
-
+                return new Division(expressions[0], expressions[1]);
         }
 
     }
 
+    /**
+     * This function assigns values to expression in right order
+     *
+     * @param expressions array of 2 expressions
+     * @param parts       String array of parts of an expression
+     */
+    abstract void assignValues(Expression[] expressions, String[] parts);
+
+    /**
+     * This function gets a string representing a literal double or literal integer and returns an
+     * Expression representing it
+     *
+     * @param str string representing a literal double
+     * @return an expression representing str
+     */
     private Expression literalExpression(String str) {
         if (str.contains(".")) return new DoubleLiteral(Double.parseDouble(str));
         return new IntegerLiteral(Integer.parseInt(str));
     }
 
+    /**
+     * This function gets a char and decides if it's a symbol
+     * @param symbol a char
+     * @return true is symbol is a symbol, otherwise false
+     */
     protected boolean isSymbol(char symbol) {
         return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
     }
-
 }
-

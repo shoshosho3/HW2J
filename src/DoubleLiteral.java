@@ -24,4 +24,8 @@ public class DoubleLiteral extends Expression {
         return number;
     }
 
+    @Override
+    public String toString()  {
+        return "(" + evaluate() + ")";
+    }
 }
