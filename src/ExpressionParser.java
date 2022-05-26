@@ -9,7 +9,7 @@ abstract class ExpressionParser {
      * @param expression string representing an expression
      * @return fitting Expression to string
      */
-    abstract Expression parse(String expression);
+    abstract public Expression parse(String expression);
 
     /**
      * This function gets an array of strings representing an expression and parses it to an expression
@@ -62,11 +62,10 @@ abstract class ExpressionParser {
 
     /**
      * This function assigns values to expression in right order
-     *
-     * @param expressions array of 2 expressions
+     *  @param expressions array of 2 expressions
      * @param parts       String array of parts of an expression
      */
-    abstract void assignValues(Expression[] expressions, String[] parts);
+    abstract protected void assignValues(Expression[] expressions, String[] parts);
 
     /**
      * This function gets a string representing a literal double or literal integer and returns an

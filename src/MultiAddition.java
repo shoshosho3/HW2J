@@ -21,7 +21,7 @@ public class MultiAddition extends MultiExpression {
      * @return result of addition
      */
     @Override
-    public double add(double leftNumber, double rightNumber) {
+    protected double add(double leftNumber, double rightNumber) {
         return leftNumber + rightNumber;
     }
 
@@ -31,7 +31,7 @@ public class MultiAddition extends MultiExpression {
      * @return String with symbol of addition
      */
     @Override
-    public String getSymbol() {
+    protected String getSymbol() {
         return " + ";
     }
 }

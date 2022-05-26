@@ -4,7 +4,7 @@
 public class ReversePolishNotationParser extends ExpressionParser {
 
     @Override
-    Expression parse(String expression) {
+    public Expression parse(String expression) {
         expression = reverse(expression);
         expression = "1 " + expression;
         String[] parts = expression.split(" ");
@@ -31,7 +31,7 @@ public class ReversePolishNotationParser extends ExpressionParser {
     }
 
     @Override
-    void assignValues(Expression[] expressions, String[] parts) {
+    protected void assignValues(Expression[] expressions, String[] parts) {
         expressions[1] = parseByParts(parts);
         expressions[0] = parseByParts(parts);
     }

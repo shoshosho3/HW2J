@@ -21,7 +21,7 @@ public class Subtraction extends MultiExpression {
      * @return result of subtraction
      */
     @Override
-    public double add(double leftNumber, double rightNumber) {
+    protected double add(double leftNumber, double rightNumber) {
         return leftNumber - rightNumber;
     }
 
@@ -30,7 +30,7 @@ public class Subtraction extends MultiExpression {
      * @return String with symbol of subtraction
      */
     @Override
-    public String getSymbol() {
+    protected String getSymbol() {
         return " - ";
     }
 }

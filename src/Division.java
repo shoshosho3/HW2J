@@ -21,7 +21,7 @@ public class Division extends MultiExpression {
      * @return result of division
      */
     @Override
-    public double add(double leftNumber, double rightNumber) {
+    protected double add(double leftNumber, double rightNumber) {
         return leftNumber / rightNumber;
     }
 
@@ -31,7 +31,7 @@ public class Division extends MultiExpression {
      * @return String with symbol of division
      */
     @Override
-    public String getSymbol() {
+    protected String getSymbol() {
         return " / ";
     }
 }

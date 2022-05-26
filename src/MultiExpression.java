@@ -39,7 +39,7 @@ public abstract class MultiExpression extends Expression {
      * @param rightNumber double
      * @return result of arithmetic operation
      */
-    public abstract double add(double leftNumber, double rightNumber);
+    protected abstract double add(double leftNumber, double rightNumber);
 
     /**
      * This function gives a string representing expression
@@ -59,5 +59,5 @@ public abstract class MultiExpression extends Expression {
     /**
      * @return symbol of arithmetic operation being done
      */
-    public abstract String getSymbol();
+    protected abstract String getSymbol();
 }

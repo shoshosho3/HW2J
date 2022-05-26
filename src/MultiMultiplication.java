@@ -21,7 +21,7 @@ public class MultiMultiplication extends MultiExpression {
      * @return result of multiplication
      */
     @Override
-    public double add(double leftNumber, double rightNumber) {
+    protected double add(double leftNumber, double rightNumber) {
         return leftNumber * rightNumber;
     }
 
@@ -31,7 +31,7 @@ public class MultiMultiplication extends MultiExpression {
      * @return String with symbol of multiplication
      */
     @Override
-    public String getSymbol() {
+    protected String getSymbol() {
         return " * ";
     }
 }
