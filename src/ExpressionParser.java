@@ -1,3 +1,6 @@
+/**
+ * This class represents a parser of an expression
+ */
 abstract class ExpressionParser {
 
     /**

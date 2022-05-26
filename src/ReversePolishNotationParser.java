@@ -1,3 +1,6 @@
+/**
+ * This class represents a parser of reverse polish notation
+ */
 public class ReversePolishNotationParser extends ExpressionParser {
 
     @Override
