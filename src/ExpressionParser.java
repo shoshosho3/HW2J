@@ -1,88 +1,93 @@
 abstract class ExpressionParser {
 
+    private Expression parseByParts(String[] parts) {
+
+        int index = Integer.parseInt(parts[0]);
+        String curr = parts[index];
+        parts[0] = "" + (index + 1);
+
+        if (curr.equals("-u")) {
+            Expression exp = parseByParts(parts);
+            return new UnaryMinus(exp);
+        }
+        if (isSymbol(curr.charAt(0))) {
+            return dualExpression(parts, curr);
+        }
+        return literalExpression(curr);
+    }
+
+
     Expression parse(String expression) {
-        Expression[] expressions = new Expression[expression.length()];
-        boolean[] expressionEnds = new boolean[expression.length()];
 
-        if (!(isSymbol(expression.charAt(endIndex(expression))) || expression.charAt(endIndex(expression)) == 'u')) return intOrDouble(expression);
-
-        for (int i = beginIndex(expression); i != endIndex(expression) - direction(); i -= direction()) {
-            if (isSymbol(expression.charAt(i))) {
-                buildExpression(expression, i, expressions, expressionEnds);
-            }
-        }
-
-        return expressions[endIndex(expression)];
-    }
-
-    abstract int beginIndex(String expression);
-    abstract int endIndex(String expression);
-    abstract int direction();
-
-    void buildExpression(String expression, int index, Expression[] expressions, boolean[] expressionEnds) {
-        if (index + 1 < expression.length() && expression.charAt(index + 1) == 'u') {
-            int i = index + 2 * direction() +((direction() + 1)/2);
-            while (i > 0 && (expression.charAt(i - 1) != ' ')) i--;
-            expressions[index] =
-                    new UnaryMinus(getExpression(expression, i, index + 2 * direction() +((direction() + 1)/2), expressions, expressionEnds, true));
-            expressions[index + 1] = expressions[index];
-        } else {
-            int afterSpace = index + 2 * direction();
-
-            String str = expression.substring(min(beginIndex(expression), afterSpace), max(beginIndex(expression), afterSpace) + 1);
-            int middle = getMiddle(str, afterSpace, expressions, expressionEnds);
-            int rightIndex = max(middle, afterSpace);
-            while(rightIndex > 0 && expression.charAt(rightIndex - 1) != ' ') rightIndex--;
-            int leftIndex = min(middle, afterSpace);
-            while(leftIndex > 0 && expression.charAt(leftIndex - 1) != ' ') leftIndex--;
-            Expression rightExpression, leftExpression;
-            int leftRight = (direction() == 1) ? middle - 2 : middle;
-            leftExpression = getExpression(expression, leftIndex, leftRight, expressions, expressionEnds, direction() == -1);
-            rightExpression = getExpression(expression, rightIndex,max(middle, afterSpace), expressions, expressionEnds, direction() == 1);
-            if (expression.charAt(index) == '+')
-                expressions[index] = new Addition(leftExpression, rightExpression);
-            if (expression.charAt(index) == '-')
-                expressions[index] = new Subtraction(leftExpression, rightExpression);
-            if (expression.charAt(index) == '*')
-                expressions[index] = new Multiplication(leftExpression, rightExpression);
-            if (expression.charAt(index) == '/')
-                expressions[index] = new Division(leftExpression, rightExpression);
-        }
-    }
-
-    int min(int num1, int num2) {
-        return (num1 < num2) ? num1 : num2;
-    }
-
-    int max(int num1, int num2) {
-        return (num1 > num2) ? num1 : num2;
-    }
-
-    int getMiddle(String expression, int index, Expression[] expressions, boolean[] expressionEnds) {
-        if (expressions[index] != null) {
-            for (int i = index; i != beginIndex(expression) + direction(); i += direction()) {
-                if (expressionEnds[i]) {
-                    expressionEnds[i] = false;
-                    return i + 2 * direction();
+        if (direction() == -1) {
+            expression = reverse(expression);
+            expression = "1 " + expression;
+            String[] parts = expression.split(" ");
+            for (int i = 0; i < parts.length; i++) {
+                if (parts[i] != "-u") {
+                    parts[i] = reverse(parts[i]);
                 }
             }
+            return parseByParts(parts);
         }
-        return getEndIndex(expression) + ((direction() + 1)/2) + index + ((direction() - 1)/2) * expression.length();
+        expression = "1 " + expression;
+        return parseByParts(expression.split(" "));
     }
+
+
+    private String reverse(String s) {
+        String result = "";
+        for (int i = 0; i < s.length(); i++) {
+            result = s.charAt(i) + result;
+        }
+        return result;
+    }
+
+
+    abstract int beginIndex(String expression);
+
+    abstract int endIndex(String expression);
+
+    abstract int direction();
+
 
     abstract int getEndIndex(String expression);
 
-    Expression getExpression(String expression, int index, int rightEnd, Expression[] expressions,
-                             boolean[] expressionEnds, boolean endOfExpression) {
-        if (expressions[index] != null)
-            return expressions[index];
+    private Expression dualExpression(String[] parts, String symbol) {
 
-        if (endOfExpression) expressionEnds[(direction() == 1) ? rightEnd : index] = true;
-        return intOrDouble(expression.substring(index, rightEnd+1));
+        Expression left, right;
+        switch (symbol) {
+            case "-":
+                left = parseByParts(parts);
+                right = parseByParts(parts);
+                if (direction() == -1) return new Subtraction(right, left);
+                return new Subtraction(left, right);
+
+            case "+":
+                left = parseByParts(parts);
+                right = parseByParts(parts);
+                if (direction() == -1) return new Addition(right, left);
+                return new Addition(left, right);
+
+            case "*":
+                left = parseByParts(parts);
+                right = parseByParts(parts);
+
+                if (direction() == -1) return new Multiplication(right, left);
+                return new Multiplication(left, right);
+
+            default:
+                left = parseByParts(parts);
+                right = parseByParts(parts);
+
+                if (direction() == -1) return new Division(right, left);
+                return new Division(left, right);
+
+        }
+
     }
 
-
-    Expression intOrDouble(String str) {
+    private Expression literalExpression(String str) {
         if (str.contains(".")) return new DoubleLiteral(Double.parseDouble(str));
         return new IntegerLiteral(Integer.parseInt(str));
     }
@@ -90,4 +95,6 @@ abstract class ExpressionParser {
     protected boolean isSymbol(char symbol) {
         return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
     }
+
 }
+

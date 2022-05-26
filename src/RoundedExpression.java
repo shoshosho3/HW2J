@@ -25,7 +25,7 @@ public class RoundedExpression extends Expression {
         for (int i = 0; i < digits; i++) {
             num *= 10;
         }
-        return (int) (expression.evaluate() * num) / num;
+        return (int) (expression.evaluate() * num + 0.5) / num;
     }
 
     /**
@@ -35,6 +35,6 @@ public class RoundedExpression extends Expression {
      */
     @Override
     public String toString() {
-        return "(" + expression.toString() + ")";
+        return expression.toString() ;
     }
 }
